@@ -5,11 +5,18 @@ public class Combinations {
     public static void main( String[] args ){
 
         int arr[] = {1, 3, 2,2};
-        int sum = 5;
-        printCombinations(arr, sum);
+        int arr1[] = {5,9,10,1,2,6,4,45,15};
+        int arr2[] = {2,7,98,31,55,25,67,89,11};
+        System.out.println("Output:");
+        printCombinations(arr, 5);
+        System.out.println("Output:");
+        printCombinations(arr1, 10);
+        System.out.println("Output:");
+        printCombinations(arr2, 100);
     }
 
     public static void printCombinations(int[] arr, int sum){
+
         for (int i = 0; i < arr.length; i++){
             //System.out.println("Goal " + goal);
             //System.out.println("Current item: " + availableItems[i]);
@@ -19,8 +26,9 @@ public class Combinations {
 
                 //System.out.println("Current item " + availableItems[i]);
                 //usedNumb.add(arr[i]);
-                System.out.println("Output:");
-                System.out.println(Arrays.toString(usedNumb.toArray()).replace("]", ", ") + arr[i] + "]");
+                usedNumb.add(arr[i]);
+                System.out.println(Arrays.toString(usedNumb.toArray()));
+                usedNumb.remove(usedNumb.size() - 1);
                 //currentSum = 0;
                 //break;
             }
