@@ -3,13 +3,37 @@ import com.sun.deploy.util.ArrayUtil;
 
 import java.util.*;
 public class Combinations {
-    public static void main( String[] args ) throws Exception {
-        int arr[] = {1, 3, 2 , 1};
-        int sum = 4;
+    public static int currentSum = 0;
+    public static ArrayList<Integer> usedItems = new ArrayList<>();
+    public static void main( String[] args ){
+
+        int arr[] = {1, 2, 3, 4, 2, 5};
+        int sum = 6;
         printCombinations(arr, sum);
     }
 
-    public static void printCombinations(int arr[], int sum){
+    public static void printCombinations(int[] availableItems, int goal){
+
+        for (int i = 0; i < availableItems.length; i++){
+            if (currentSum + availableItems[i] == goal){
+                System.out.println(Arrays.toString(usedItems.toArray()) + availableItems[i]);
+                currentSum = 0;
+                usedItems.clear();
+
+            }
+            if((currentSum + availableItems[i]) > goal){
+                continue;
+            }
+            if(currentSum + availableItems[i] < goal){
+                currentSum += availableItems[i];
+                usedItems.add(availableItems[i]);
+                int[] newAvailableItems = Arrays.copyOfRange(availableItems, 1, availableItems.length);
+                printCombinations(newAvailableItems, goal);
+            }
+        }
+    }
+
+    /*public static void printCombinations(int arr[], int sum){
         int count = 0;
         int actualSum = sum;
         while (count < arr.length) {
@@ -44,6 +68,6 @@ public class Combinations {
             count++;
             sum = actualSum;
         }
-    }
+    }*/
 
 }
