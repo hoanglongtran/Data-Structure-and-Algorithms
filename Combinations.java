@@ -1,35 +1,45 @@
-
-import com.sun.deploy.util.ArrayUtil;
-
 import java.util.*;
 public class Combinations {
-    public static int currentSum = 0;
-    public static ArrayList<Integer> usedItems = new ArrayList<>();
+    //public static int currentSum = 0;
+    public static ArrayList<Integer> usedNumb = new ArrayList<>();
     public static void main( String[] args ){
 
-        int arr[] = {1, 2, 3, 4, 2, 5};
-        int sum = 6;
+        int arr[] = {1, 3, 2,2};
+        int sum = 5;
         printCombinations(arr, sum);
     }
 
-    public static void printCombinations(int[] availableItems, int goal){
+    public static void printCombinations(int[] arr, int sum){
+        for (int i = 0; i < arr.length; i++){
+            //System.out.println("Goal " + goal);
+            //System.out.println("Current item: " + availableItems[i]);
+            int[] newReducedArray = Arrays.copyOfRange(arr, 1 + i , arr.length);
 
-        for (int i = 0; i < availableItems.length; i++){
-            if (currentSum + availableItems[i] == goal){
-                System.out.println(Arrays.toString(usedItems.toArray()) + availableItems[i]);
-                currentSum = 0;
-                usedItems.clear();
+            if (sum - arr[i] == 0){
 
+                //System.out.println("Current item " + availableItems[i]);
+                //usedNumb.add(arr[i]);
+                System.out.println("Output:");
+                System.out.println(Arrays.toString(usedNumb.toArray()).replace("]", ", ") + arr[i] + "]");
+                //currentSum = 0;
+                //break;
             }
-            if((currentSum + availableItems[i]) > goal){
+
+            if(sum < arr[i] ){
                 continue;
             }
-            if(currentSum + availableItems[i] < goal){
-                currentSum += availableItems[i];
-                usedItems.add(availableItems[i]);
-                int[] newAvailableItems = Arrays.copyOfRange(availableItems, 1, availableItems.length);
-                printCombinations(newAvailableItems, goal);
+            usedNumb.add(arr[i]);
+            if(sum - arr[i] > 0){
+                //currentSum += availableItems[i];
+
+                //System.out.println("Current goal " + (goal - availableItems[i]));
+
+
+
+                printCombinations(newReducedArray, sum - arr[i]);
             }
+            usedNumb.remove(usedNumb.size() -1 );
+
         }
     }
 
