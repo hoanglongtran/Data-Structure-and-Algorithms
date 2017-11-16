@@ -1,12 +1,14 @@
 package Assignments;
+import com.sun.deploy.util.ArrayUtil;
+
 import java.util.*;
 public class Combinations {
     public static void main(String[] args) {
 
         System.out.printf("Please enter the array:");
-        int[] a = {1};
-        ArrayList<Integer> soFar = new ArrayList<>();
-        printCombinations(soFar,a);
+        int[] a = {1, 2, 3, 4, 5};
+
+        printCombinations(a, 4);
         //getInput();
     }
     /*public static List<Integer> getInput() {
@@ -19,16 +21,16 @@ public class Combinations {
 
         return input;
     }*/
-    public static void printCombinations(ArrayList<Integer> current, int[]arr ) {
-        if (arr.equals(0)){
-            System.out.println(current);
-        }
-        else {
+    public static void printCombinations(int[]arr, int sum ) {
 
-            printCombinations(new ArrayList<Integer>(current) {{ add(arr[0]); }}, Arrays.copyOfRange(arr, 1, arr.length) );
+        List<Integer> input = new ArrayList<>(Arrays.asList(arr));
 
-            printCombinations(current, Arrays.copyOfRange(arr, 1, arr.length));
+        for (int i = 0; i < arr.length; i++){
+            if (input.get(i) > sum){
+                input.remove(i);
+            }
         }
+        System.out.println(input);
 
     }
 
