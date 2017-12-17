@@ -11,11 +11,11 @@
                   https://www.youtube.com/watch?v=NdF1QDTRkck
 
 */
-
+package Assignments;
 import java.util.*;
 public class Combinations {
     //public static int currentSum = 0;
-    private static ArrayList<Integer> usedNumb = new ArrayList<>();
+    private static ArrayList<Integer> usedNumb = new ArrayList<>(); //Create a data field as an arraylist to be used by the method
     public static void main( String[] args ){
 
         int arr[] = {1, 3, 2,2};
@@ -30,21 +30,21 @@ public class Combinations {
     }
 
     public static void printCombinations(int[] arr, int sum){
-        for (int i = 0; i < arr.length; i++){
-            int[] newReducedArray = Arrays.copyOfRange(arr, 1 + i , arr.length);
-            if (sum - arr[i] == 0){
-                usedNumb.add(arr[i]);
+        for (int i = 0; i < arr.length; i++){   //
+            if (sum - arr[i] == 0){ //If the subtraction results in 0, print out all the elements inside the List plus the current element in the array
+                usedNumb.add(arr[i]); //This insert the element into the arrayList in order to display everything within the brackets
                 System.out.println(Arrays.toString(usedNumb.toArray()));
-                usedNumb.remove(usedNumb.size() - 1);
+                usedNumb.remove(usedNumb.size() - 1); //Remove the current element after printing out
             }
-            if(sum < arr[i] ){
+            if(sum < arr[i] ){  //If the current number is larger than the sum, skip the iteration
                 continue;
             }
-            usedNumb.add(arr[i]);
-            if(sum - arr[i] > 0){
-                printCombinations(newReducedArray, sum - arr[i]);
+            int[] newReducedArray = Arrays.copyOfRange(arr, 1 + i , arr.length); //Create a new array that will be used for the next recursion
+            usedNumb.add(arr[i]);   //Add the current element into the List
+            if(sum - arr[i] > 0){   //If the sum subtracts the current array doesn't equal 0, hold the current elements inside the arrayList and call the method again to check for the next element
+                printCombinations(newReducedArray, sum - arr[i]); // Subtract the sum with the current array element
             }
-            usedNumb.remove(usedNumb.size() -1 );
+            usedNumb.remove(usedNumb.size() -1 );   //If there is no suitable next element that sum with the elements inside the arrayList to be equal 0, remove the last one and jump back for the next iteration
         }
     }
 }
